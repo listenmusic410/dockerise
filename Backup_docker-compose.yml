@@ -1,0 +1,29 @@
+version: '3.9'
+
+services:
+  mysql:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: sql1
+      MYSQL_DATABASE: faTest
+      MYSQL_HOST : mysql
+      MYSQL_PORT: 3306
+    ports:
+      - "3307:3306"  # Map MySQL container's port 3306 to the host
+    networks:
+      - mynetwork
+
+  spring-app:
+    build: .
+    ports:
+      - "7417:7417"  # Adjust port mapping as needed
+    depends_on:
+      - mysql
+    networks:
+      - mynetwork
+networks:
+  mynetwork:
+
+  
+ # mysql -h 127.0.0.1 -P 3306 -u root -p
+  
